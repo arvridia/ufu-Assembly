@@ -1,0 +1,61 @@
+000 LOAD M(110); JUMP +M(00D,0:19)
+
+001 ADD M(115); STOR M(110)
+
+002 LOAD M(112);JUMP +M(0F7,0:19)
+
+003 ADD M(115);STOR M(112)
+
+004 LOAD M(111); JUMP +M(0F3,0:19)
+
+005 ADD M(115); STOR M(111)
+
+007 LOAD M (116); STOR M (11A)
+#passa expoente para outra variavel
+
+008 SUB M (11C);JUMP +M(00D,0:19)
+#confere se expoente é maior que um
+
+009 ADD M (115);JUMP +M(00B,20:39)
+#confere se expoente é maior que zero
+
+00A LOAD (115);STOR M(11B)
+
+00B JUMP M(0F3,0:19);LOAD M(110)
+#sai do laço
+
+00C STOR (11B);JUMP M(0F3,0:19)
+#sai do laço
+
+00D LOAD M(11B);STOR M(119)
+
+00E STOR M (11B);LOAD (11B)  
+
+00F MUL M(119); STOR M (11B)
+
+010 LOAD MQ; ADD M(11B)
+
+0F0 STOR M(11B); LOAD M(11A)
+#armazenamento da primeira multiplicacao
+
+0F1 SUB M (115);STOR M(11A)
+
+0F2  LOAD M(11A);JUMP+M(00E,20:39)
+
+0F3 LOAD MQ,M(114);MUL M(11B)
+#carrega coeficiente e multiplica por x 
+
+0F4 STOR M (117);LOAD MQ
+#guarda o resultado
+
+0F5 ADD M(117);STOR M(118)
+
+0F6 LOAD M(112);ADD M(118)
+
+0F7 STOR M(112);LOAD(113)
+#guarda o novo polinomio
+
+0F8 SUB M(115);STOR M(113)
+#atualiza contador
+
+0F9 LOAD M (113);JUMP+(007;0:19)
